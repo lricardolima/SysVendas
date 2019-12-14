@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{ asset('site/style.css') }}">
 </head>
 <body>
+
+
+
 <script src="{{ asset('site/jquery.js') }}"></script>
 <script src="{{ asset('site/bootstrap.js') }}"></script>
 </body>
