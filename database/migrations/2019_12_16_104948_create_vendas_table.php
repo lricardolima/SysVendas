@@ -22,7 +22,7 @@ class CreateVendasTable extends Migration
             $table->string('serie');
             $table->string('correlativo');
             $table->decimal('imposto', 4, 2);
-            $table->timestamps()
+            $table->timestamps();
         });
     }
 
