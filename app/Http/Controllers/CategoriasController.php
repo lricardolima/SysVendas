@@ -6,19 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers;
 use App\Categoria;
 use Illuminate\Validation\Rules\Unique;
+use Session;
 
 class CategoriasController extends Controller
 {
     public function index(){
-        $categorias = Categoria::all();
-        return view ('categoria.index', array('categorias' => $categorias));
+        $categoria = Categoria::all();
+        return view ('categoria.index', array('categorias' => $categoria));
         }
 
     public function show($categoria_id){
         $categoria = Categoria::find($categoria_id);
-        echo "<pre>";
-        print_r($categoria);
-        echo "</pre>";
+        return view ('categoria.show', array('categorias' => $categoria));
         }
 
     public function create(){
@@ -29,17 +28,48 @@ class CategoriasController extends Controller
 
         $this -> validate($request, ['nome' => 'required|Unique:categorias|min:3', 'descricao' => 'required|min:3',]);
 
-        $categorias = new Categoria();
-        $categorias -> nome = $request -> input('nome');
-        $categorias -> descricao = $request -> input('descricao');
-        if($categorias -> save()){
+        $categoria = new Categoria();
+        $categoria -> nome = $request -> input('nome');
+        $categoria -> descricao = $request -> input('descricao');
+        if($categoria -> save()){
             return redirect('categorias');
         }
     }
 
-    public function edit($categorias_id){
-        $categorias_id = Categoria::find($categorias_id);
-        return view('categoria.edit', array('categoria' => '$categoria'));
+    public function edit($categoria_id){
+        $categoria = Categoria::find($categoria_id);
+        return view('categoria.edit', array('categorias' => $categoria));
     }
+
+
+    public function update($categoria_id, Request $request){
+        $categoria = Categoria::find($categoria_id);
+        $this->validate($request, [
+            'nome' => 'required|min:3',
+            'descricao' => 'required|min:3',
+            ]);
+            if($request->hasFile('fotocategoria')){
+                $imagem = $request->file('fotocategoria');
+                $nomearquivo = md5($categoria_id) .".". $imagem->getClientOriginalExtension();
+                $request->file('fotocategoria')->move(public_path('./img/categorias/'),
+                $nomearquivo);
+                }
+
+            $categoria->nome = $request->input('nome');
+            $categoria->descricao = $request->input('descricao');
+            $categoria->save();
+            Session::flash('mensagem', 'Categoria alterada com sucesso.');
+            return redirect()->back();
+    }
+
+    public function destroy($categoria_id){
+        $categoria = Categoria::find($categoria_id);
+        $categoria->delete();
+        Session::flash('mensagem', 'Categoria excluída com sucesso.');
+        return redirect()->back();
+
+    }
+
+
 
 }
