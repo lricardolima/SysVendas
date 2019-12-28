@@ -19,6 +19,10 @@ Route::resource('categorias', 'CategoriasController');
 Route::get('adicionar-categorias', 'CategoriasController@create');
 Route::get('categorias/{id}/editar', 'CategoriasController@edit');
 
+Route::resource('apresentacaos', 'ApresentacaosController');
+Route::get('adicionar-apresentacaos', 'ApresentacaosController@create');
+Route::get('apresentacaos/{id}/editar', 'ApresentacaosController@edit');
+
 
 Route::resource('/produtos', 'ProdutosController');
 Route::get('adicionar-produto', 'ProdutosController@create');
