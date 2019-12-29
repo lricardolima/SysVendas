@@ -21,6 +21,10 @@
     {{Form::label('descricao', 'Descrição')}}
     {{Form::textarea('descricao','',['rows'=>3,'class'=>'form-control',
     'required','placeholder'=>'Descrição'])}}
+    {{Form::label('fotocategoria', 'Foto')}}
+    {{Html::image(asset("img/produto/" . md5($errors->produto_id) .
+    ".jpg"))}}
+    {{Form::file('fotoproduto',['class'=>'form-control','produto_id'=>'fotoproduto'])}}
     <br/>
     {{Form::submit('Cadastrar',['class'=>'btn btn-default'])}}
     {{Form::close()}}

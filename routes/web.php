@@ -26,4 +26,4 @@ Route::get('apresentacaos/{id}/editar', 'ApresentacaosController@edit');
 
 Route::resource('/produtos', 'ProdutosController');
 Route::get('adicionar-produto', 'ProdutosController@create');
-Route::get('produtos/{id}/editar', 'ProdutosController@edit');
+Route::get('produtos/{$produto_id}/editar', 'ProdutosController@edit');
