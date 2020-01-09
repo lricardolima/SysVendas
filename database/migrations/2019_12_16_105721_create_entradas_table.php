@@ -14,15 +14,18 @@ class CreateEntradasTable extends Migration
     public function up()
     {
         Schema::create('entradas', function (Blueprint $table) {
-            $table->bigIncrements('entrada_id');
-            $table->unsignedBigInteger('funcionario_id');
-            $table->unsignedBigInteger('fornecedores_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('funcionarios');
+            $table->unsignedBigInteger('fornecedores');
             $table->date('data');
             $table->string('tipo_comprovante');
             $table->string('serie');
             $table->string('correlativo');
             $table->decimal('imposto', 4, 2);
             $table->timestamps();
+
+            $table->foreign('funcionarios')->references('id')->on('funcionarios')->onDelete('cascade');
+            $table->foreign('fornecedores')->references('id')->on('fornecedores')->onDelete('cascade');
         });
     }
 

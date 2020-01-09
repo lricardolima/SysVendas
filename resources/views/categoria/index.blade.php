@@ -9,20 +9,20 @@
 @foreach ($categorias as $categoria)
 <div class="col-md-3">
 <h4>{{$categoria->nome}}</h4>
-@if(file_exists("./img/categorias/" . md5($categoria->categoria_id) . ".jpg"))
-<a class='thumbnail' href="{{ url('categorias/'.$categoria->categoria_id) }}">
-{{Html::image(asset("img/categorias/" . md5($categoria->categoria_id) .
+@if(file_exists("./img/categorias/" . md5($categoria->id) . ".jpg"))
+<a class='thumbnail' href="{{ url('categorias/'.$categoria->id) }}">
+{{Html::image(asset("img/categorias/" . md5($categoria->id) .
 ".jpg"))}}
 </a>
 @else
-<a class='thumbnail' href="{{ url('categorias/'.$categoria->categoria_id) }}">
+<a class='thumbnail' href="{{ url('categorias/'.$categoria->id) }}">
 {{ $categoria->nome }}
 </a>
 @endif
-{{Form::open(['route'=>['categorias.destroy',$categoria->categoria_id],
+{{Form::open(['route'=>['categorias.destroy',$categoria->id],
 'method'=>'DELETE'])}}
 <a class='btn btn-primary'
-href=" {{url('categorias/'.$categoria->categoria_id.'/edit')}} ">Editar</a>
+href=" {{url('categorias/'.$categoria->id.'/edit')}} ">Editar</a>
 {{Form::submit('Excluir',['class'=>'btn btn-danger'])}}
 {{Form::close()}}
 </div>

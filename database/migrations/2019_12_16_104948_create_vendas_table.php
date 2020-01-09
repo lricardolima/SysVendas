@@ -14,15 +14,18 @@ class CreateVendasTable extends Migration
     public function up()
     {
         Schema::create('vendas', function (Blueprint $table) {
-            $table->bigIncrements('venda_id');
-            $table->unsignedBigInteger('cliente_id');
-            $table->unsignedBigInteger('funcionario_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('clientes');
+            $table->unsignedBigInteger('funcionarios');
             $table->date('data');
             $table->string('tipo_comprovante');
             $table->string('serie');
             $table->string('correlativo');
             $table->decimal('imposto', 4, 2);
             $table->timestamps();
+
+            $table->foreign('clientes')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('funcionarios')->references('id')->on('funcionarios')->onDelete('cascade');
         });
     }
 

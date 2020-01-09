@@ -14,13 +14,16 @@ class CreateDetalheVendasTable extends Migration
     public function up()
     {
         Schema::create('detalhe__vendas', function (Blueprint $table) {
-            $table->bigIncrements('detalhe_venda_id');
-            $table->unsignedBigInteger('venda_id');
-            $table->unsignedBigInteger('detalhe_entrada_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('vendas');
+            $table->unsignedBigInteger('detalhe_entradas');
             $table->integer('quantidade');
             $table->float('preco_venda', 8, 2);
             $table->float('desconto', 8, 2);
             $table->timestamps();
+
+            $table->foreign('vendas')->references('id')->on('vendas')->onDelete('cascade');
+            $table->foreign('detalhe_entradas')->references('id')->on('detalhe_entradas')->onDelete('cascade');
         });
     }
 

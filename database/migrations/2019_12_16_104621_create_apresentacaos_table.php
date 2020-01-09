@@ -14,7 +14,7 @@ class CreateApresentacaosTable extends Migration
     public function up()
     {
         Schema::create('apresentacaos', function (Blueprint $table) {
-            $table->bigIncrements('apresentacao_id');
+            $table->bigIncrements('id');
             $table->string('nome', 30);
             $table->longText('descricao');
             $table->timestamps();

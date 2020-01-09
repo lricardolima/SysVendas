@@ -14,9 +14,9 @@ class CreateDetalheEntradasTable extends Migration
     public function up()
     {
         Schema::create('detalhe__entradas', function (Blueprint $table) {
-            $table->bigIncrements('detalhe_entrada_id');
-            $table->unsignedBigInteger('entrada_id');
-            $table->unsignedBigInteger('produto_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('entradas');
+            $table->unsignedBigInteger('produtos');
             $table->float('preco_compra', 8, 2);
             $table->float('preco_venda', 8, 2);
             $table->integer('estaque_inicial');
@@ -24,6 +24,9 @@ class CreateDetalheEntradasTable extends Migration
             $table->date('data_producao');
             $table->date('data_vencimento');
             $table->timestamps();
+
+            $table->foreign('entradas')->references('id')->on('entradas')->onDelete('cascade');
+            $table->foreign('produtos')->references('id')->on('produtos')->onDelete('cascade');
         });
     }
 

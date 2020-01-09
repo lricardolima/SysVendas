@@ -9,20 +9,20 @@
 @foreach ($apresentacaos as $apresentacao)
 <div class="col-md-3">
 <h4>{{ $apresentacao->nome}}</h4>
-@if(file_exists("./img/apresentacaos/" . md5($apresentacao->apresentacao_id) . ".jpg"))
-<a class='thumbnail' href="{{ url('apresentacaos/'.$apresentacao->apresentacao_id) }}">
-{{Html::image(asset("img/apresentacaos/" . md5($apresentacao->apresentacao_id) .
+@if(file_exists("./img/apresentacaos/" . md5($apresentacao->id) . ".jpg"))
+<a class='thumbnail' href="{{ url('apresentacaos/'.$apresentacao->id) }}">
+{{Html::image(asset("img/apresentacaos/" . md5($apresentacao->id) .
 ".jpg"))}}
 </a>
 @else
-<a class='thumbnail' href="{{ url('apresentacaos/'.$apresentacao->apresentacao_id) }}">
+<a class='thumbnail' href="{{ url('apresentacaos/'.$apresentacao->id) }}">
 {{ $apresentacao->nome }}
 </a>
 @endif
-{{Form::open(['route'=>['apresentacaos.destroy',$apresentacao->apresentacao_id],
+{{Form::open(['route'=>['apresentacaos.destroy',$apresentacao->id],
 'method'=>'DELETE'])}}
 <a class='btn btn-primary'
-href=" {{url('apresentacaos/'.$apresentacao->apresentacao_id.'/edit')}} ">Editar</a>
+href=" {{url('apresentacaos/'.$apresentacao->id.'/edit')}} ">Editar</a>
 {{Form::submit('Excluir',['class'=>'btn btn-danger'])}}
 {{Form::close()}}
 </div>

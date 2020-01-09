@@ -14,8 +14,8 @@ class CreateFornecedoresTable extends Migration
     public function up()
     {
         Schema::create('fornecedores', function (Blueprint $table) {
-            $table->bigIncrements('fornecedores_id');
-            $table->unsignedBigInteger('empresa_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('empresas');
             $table->string('setor_comercial');
             $table->string('tipo_documento');
             $table->integer('num_documento');
@@ -24,6 +24,8 @@ class CreateFornecedoresTable extends Migration
             $table->string('email') ->unique();
             $table->string('url') ->unique();
             $table->timestamps();
+
+            $table->foreign('empresas')->references('id')->on('empresas')->onDelete('cascade');
         });
     }
 

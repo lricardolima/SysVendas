@@ -14,7 +14,7 @@ class CreateFuncionariosTable extends Migration
     public function up()
     {
         Schema::create('funcionarios', function (Blueprint $table) {
-            $table->bigIncrements('funcionario_id');
+            $table->bigIncrements('id');
             $table->string('nome', 30);
             $table->string('sobrenome', 30);
             $table->enum('sexo', ['Masculino', 'Feminino']);
